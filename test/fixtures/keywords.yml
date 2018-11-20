@@ -2,10 +2,5 @@
 
 one:
   ad_group: one
-  text: MyString
-  match_type: 1
-
-two:
-  ad_group: two
-  text: MyString
-  match_type: 1
+  text: 16-4 speaker
+  match_type: phrase

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_045417) do
+ActiveRecord::Schema.define(version: 2018_11_20_053351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,36 @@ ActiveRecord::Schema.define(version: 2018_11_20_045417) do
     t.index ["ad_group_id"], name: "index_keywords_on_ad_group_id"
   end
 
+  create_table "search_term_report_items", force: :cascade do |t|
+    t.bigint "search_term_report_id"
+    t.bigint "ad_group_id"
+    t.bigint "keyword_id"
+    t.bigint "search_term_id"
+    t.date "date"
+    t.string "currency"
+    t.integer "impressions"
+    t.integer "clicks"
+    t.integer "click_through_rate"
+    t.integer "cost_per_click"
+    t.integer "spend"
+    t.integer "seven_days_total_sales"
+    t.integer "total_advertising_cost_of_sales"
+    t.integer "total_return_on_advertising_spend"
+    t.integer "seven_day_total_orders"
+    t.integer "seven_day_total_units"
+    t.integer "seven_day_conversion_rate"
+    t.integer "seven_day_advertised_sku_units"
+    t.integer "seven_day_other_sku_units"
+    t.integer "seven_day_advertised_sku_sales"
+    t.integer "seven_day_other_sku_sales"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_group_id"], name: "index_search_term_report_items_on_ad_group_id"
+    t.index ["keyword_id"], name: "index_search_term_report_items_on_keyword_id"
+    t.index ["search_term_id"], name: "index_search_term_report_items_on_search_term_id"
+    t.index ["search_term_report_id"], name: "index_search_term_report_items_on_search_term_report_id"
+  end
+
   create_table "search_term_reports", force: :cascade do |t|
     t.string "name"
     t.boolean "processed", default: false
@@ -74,4 +104,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_045417) do
 
   add_foreign_key "ad_groups", "campaigns"
   add_foreign_key "keywords", "ad_groups"
+  add_foreign_key "search_term_report_items", "ad_groups"
+  add_foreign_key "search_term_report_items", "keywords"
+  add_foreign_key "search_term_report_items", "search_term_reports"
+  add_foreign_key "search_term_report_items", "search_terms"
 end

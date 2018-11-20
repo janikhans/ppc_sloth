@@ -1,9 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  campaign: one
-  name: MyString
-
-two:
-  campaign: two
-  name: MyString
+  campaign: 16-4
+  name: Phrase
