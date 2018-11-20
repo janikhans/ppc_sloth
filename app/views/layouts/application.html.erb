@@ -4,12 +4,21 @@
     <title>PpcSloth</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body id="page-top">
+    <%= render 'shared/navbar' %>
+    <div id="wrapper">
+      <%= render 'shared/sidebar' %>
+      <div id="content-wrapper">
+        <div class="container-fluid">
+          <%= yield %>
+        </div>
+        <%= render 'shared/footer' %>
+      </div>
+    </div>
   </body>
 </html>
