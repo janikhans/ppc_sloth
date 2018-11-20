@@ -1,0 +1,16 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Search Term Reports', path: search_term_reports_path }
+]) %>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-table"></i>
+    Search Term Reports
+    <%= link_to 'Upload Search Term Report', new_search_term_report_path %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <%= render @search_term_reports %>
+  </ul>
+  <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>

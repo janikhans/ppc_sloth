@@ -1,0 +1,37 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Search Term Reports', path: search_term_reports_path },
+  { text: @search_term_report.name, path: nil }
+]) %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        Search Term Report
+        <%= link_to 'Edit', edit_search_term_report_path(@search_term_report) %>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Name:</strong>
+          <%= @search_term_report.name  %>
+        </p>
+        <p>
+          <strong>File:</strong>
+          <%= link_to @search_term_report.file.blob.filename, rails_blob_path(@search_term_report.file, disposition: "attachment")  %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Keywords
+      </div>
+      <ul class="list-group list-group-flush">
+        <%#= render @ad_groups %>
+      </ul>
+    </div>
+  </div>
+</div>
