@@ -8,6 +8,7 @@ class AdGroupsController < ApplicationController
 
   # GET /ad_groups/1
   def show
+    @keywords = @ad_group.keywords
   end
 
   # GET /ad_groups/new

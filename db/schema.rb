@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_040559) do
+ActiveRecord::Schema.define(version: 2018_11_20_043346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,5 +29,15 @@ ActiveRecord::Schema.define(version: 2018_11_20_040559) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "keywords", force: :cascade do |t|
+    t.bigint "ad_group_id"
+    t.string "text", null: false
+    t.integer "match_type", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_group_id"], name: "index_keywords_on_ad_group_id"
+  end
+
   add_foreign_key "ad_groups", "campaigns"
+  add_foreign_key "keywords", "ad_groups"
 end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ad_group: one
+  text: MyString
+  match_type: 1
+
+two:
+  ad_group: two
+  text: MyString
+  match_type: 1
