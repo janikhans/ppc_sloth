@@ -16,3 +16,7 @@ AdGroup.all.each do |ad_group|
     )
   end
 end
+
+rand(100..150).times do
+  SearchTerm.create(text: Faker::Hipster.words(rand(1..4)).join(' '))
+end
