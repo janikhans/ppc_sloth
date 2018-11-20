@@ -1,0 +1,33 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Campaigns', path: campaigns_path },
+  { text: @campaign.name, path: nil }
+]) %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        Campaign
+        <%= link_to 'Edit', edit_campaign_path(@campaign) %>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Name:</strong>
+          <%= @campaign.name %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Ad Groups
+      </div>
+      <ul class="list-group list-group-flush">
+        <%= render @ad_groups %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        Ad Group
+        <%= link_to 'Edit', edit_ad_group_path(@ad_group) %>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Campaign:</strong>
+          <%= @ad_group.campaign.name %>
+        </p>
+
+        <p>
+          <strong>Name:</strong>
+          <%= @ad_group.name %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Keywords
+      </div>
+      <ul class="list-group list-group-flush">
+        <%#= render @search_terms %>
+      </ul>
+    </div>
+  </div>
+</div>

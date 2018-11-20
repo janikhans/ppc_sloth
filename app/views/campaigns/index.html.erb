@@ -1,0 +1,16 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Campaigns', path: campaigns_path }
+]) %>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-table"></i>
+    Campaigns
+    <%= link_to 'New Campaign', new_campaign_path %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <%= render @campaigns %>
+  </ul>
+  <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
