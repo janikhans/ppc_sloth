@@ -1,0 +1,27 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Search Terms', path: search_terms_path }
+]) %>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fas fa-table"></i>
+    Search Terms
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Reported Days</th>
+          <th>Impressions</th>
+          <th>Clicks</th>
+          <th>CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @search_terms %>
+      </tbody>
+    </table>
+  </div>
+</div>

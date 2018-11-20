@@ -1,0 +1,45 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Search Terms', path: search_terms_path },
+  { text: @search_term.text, path: nil }
+]) %>
+
+<div class="row">
+  <div class="col-md-12 mb-3">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between">
+        <%= @search_term.text  %>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>First Recorded:</strong>
+          <%= @search_term.created_at %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        History
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Ad Group</th>
+              <th>Date</th>
+              <th>Impressions</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render @search_term_report_items %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

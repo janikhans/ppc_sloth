@@ -32,7 +32,7 @@ class SearchTermReportImporter
   end
 
   rows do |row|
-    item = search_term_report.items.find_or_initialize_by(
+    item = SearchTermReportItem.find_or_initialize_by(
       ad_group: row.ad_group,
       keyword: row.keyword,
       search_term: row.search_term,
@@ -40,6 +40,7 @@ class SearchTermReportImporter
     )
 
     item.assign_attributes(
+      search_term_report: search_term_report,
       currency: row.currency,
       impressions: row.impressions,
       clicks: row.clicks
