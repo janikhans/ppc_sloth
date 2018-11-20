@@ -3,7 +3,7 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.all.order(name: :asc)
   end
 
   # GET /campaigns/1

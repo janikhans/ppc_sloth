@@ -49,7 +49,7 @@ class SearchTermReportImporter
     row.search_term.save if row.search_term.new_record?
     item.save if item.changed?
 
-    search_term_report.update(processed: true)
+    search_term_report.update(imported: Time.current)
   end
 
   errors do |error, line_number|

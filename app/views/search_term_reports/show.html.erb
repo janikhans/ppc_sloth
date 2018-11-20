@@ -9,7 +9,10 @@
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         Search Term Report
-        <%= link_to 'Edit', edit_search_term_report_path(@search_term_report) %>
+        <div class="btn-group">
+          <%= link_to 'Edit', edit_search_term_report_path(@search_term_report), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', search_term_report_path(@search_term_report), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } %>
+        </div>
       </div>
       <div class="card-body">
         <p>
@@ -19,6 +22,14 @@
         <p>
           <strong>File:</strong>
           <%= link_to @search_term_report.file.blob.filename, rails_blob_path(@search_term_report.file, disposition: "attachment")  %>
+        </p>
+        <p>
+          <strong>Imported:</strong>
+          <% if @search_term_report.imported? %>
+            <%= @search_term_report.imported %>
+          <% else %>
+            <%= link_to 'Import Now', import_search_term_report_path(@search_term_report), method: :post  %>
+          <% end %>
         </p>
       </div>
     </div>

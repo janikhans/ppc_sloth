@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
 
   create_table "search_term_reports", force: :cascade do |t|
     t.string "name"
-    t.boolean "processed", default: false
+    t.datetime "imported"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

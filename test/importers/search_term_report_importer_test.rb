@@ -13,12 +13,12 @@ class SearchTermReportImporterTest < ActiveSupport::TestCase
       search_term_report: @report
     )
   end
-  test 'should process report' do
-    refute @report.processed?
+  test 'should import report' do
+    refute @report.imported?
 
     @new_report.import!
 
-    assert @report.processed?
+    assert @report.imported?
   end
 
   test 'should create new campaign' do

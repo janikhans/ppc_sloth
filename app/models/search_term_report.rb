@@ -3,8 +3,12 @@ class SearchTermReport < ApplicationRecord
 
   has_many :items, class_name: 'SearchTermReportItem'
 
+  def imported?
+    imported.present?
+  end
+
   def import!
-    return if processed?
+    return if imported?
     SearchTermReportImporter.new(
       path: ActiveStorage::Blob.service.send(:path_for, file.key),
       search_term_report: self

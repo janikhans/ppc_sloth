@@ -1,5 +1,5 @@
 class SearchTermReportsController < ApplicationController
-  before_action :set_search_term_report, only: [:show, :edit, :update, :destroy]
+  before_action :set_search_term_report, only: [:show, :edit, :update, :destroy, :import]
 
   # GET /search_term_reports
   def index
@@ -44,6 +44,11 @@ class SearchTermReportsController < ApplicationController
   def destroy
     @search_term_report.destroy
     redirect_to search_term_reports_url, notice: 'Search Term Report was successfully destroyed.'
+  end
+
+  def import
+    @search_term_report.import!
+    redirect_to @search_term_report, notice: 'Search Term Report was successfully imported.'
   end
 
   private
