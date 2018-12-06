@@ -5,5 +5,5 @@
   <td><%= keyword.reported_days %></td>
   <td><%= keyword.impressions %></td>
   <td><%= keyword.clicks %></td>
-  <td><%= keyword.ctr %></td>
+  <td><%= number_to_percentage(keyword.ctr) %></td>
 </tr>

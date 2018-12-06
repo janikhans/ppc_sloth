@@ -78,21 +78,21 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.bigint "search_term_id"
     t.date "date"
     t.string "currency"
-    t.integer "impressions"
-    t.integer "clicks"
-    t.integer "click_through_rate"
-    t.integer "cost_per_click"
-    t.integer "spend"
-    t.integer "seven_day_total_sales"
-    t.integer "total_advertising_cost_of_sales"
-    t.integer "total_return_on_advertising_spend"
-    t.integer "seven_day_total_orders"
-    t.integer "seven_day_total_units"
-    t.integer "seven_day_conversion_rate"
-    t.integer "seven_day_advertised_sku_units"
-    t.integer "seven_day_other_sku_units"
-    t.integer "seven_day_advertised_sku_sales"
-    t.integer "seven_day_other_sku_sales"
+    t.integer "impressions", default: 0
+    t.integer "clicks", default: 0
+    t.decimal "click_through_rate", precision: 9, scale: 4, default: "0.0"
+    t.integer "cost_per_click", default: 0
+    t.integer "spend", default: 0
+    t.integer "seven_day_total_sales", default: 0
+    t.integer "total_advertising_cost_of_sales", default: 0
+    t.decimal "total_return_on_advertising_spend", precision: 9, scale: 4, default: "0.0"
+    t.integer "seven_day_total_orders", default: 0
+    t.integer "seven_day_total_units", default: 0
+    t.decimal "seven_day_conversion_rate", precision: 9, scale: 4, default: "0.0"
+    t.integer "seven_day_advertised_sku_units", default: 0
+    t.integer "seven_day_other_sku_units", default: 0
+    t.integer "seven_day_advertised_sku_sales", default: 0
+    t.integer "seven_day_other_sku_sales", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ad_group_id"], name: "index_search_term_report_items_on_ad_group_id"
