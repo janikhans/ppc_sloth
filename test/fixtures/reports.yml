@@ -1,7 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
   type: SearchTermReport
+  period_start: <%= Date.today - 1.month %>
+  period_end: <%= Date.today %>
+  analyzed_at: <%= Time.current %>
 
 two:
   type: AdvertisedProductReport

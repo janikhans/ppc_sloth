@@ -8,7 +8,7 @@
     <td></td>
   <% end %>
   <% if report.analyzed? && report.imported? %>
-    <td><%= report.imported.strftime('%b %d, %Y') %></td>
+    <td><%= report.imported_at.strftime('%b %d, %Y') %></td>
   <% elsif report.analyzed? %>
     <td><%= link_to 'Import Now', import_report_path(report), method: :post, class: 'btn btn-sm btn-primary' %></td>
   <% else %>

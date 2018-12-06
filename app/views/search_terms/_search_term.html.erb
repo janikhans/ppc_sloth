@@ -3,5 +3,5 @@
   <td><%= search_term.reported_days %></td>
   <td><%= search_term.impressions %></td>
   <td><%= search_term.clicks %></td>
-  <td><%= search_term.ctr %></td>
+  <td><%= number_to_percentage(search_term.ctr) %></td>
 </tr>

@@ -11,7 +11,7 @@ one:
   click_through_rate: 1
   cost_per_click: 1
   spend: 1
-  seven_days_total_sales: 1
+  seven_day_total_sales: 1
   total_advertising_cost_of_sales: 1
 
 two:
@@ -25,5 +25,5 @@ two:
   click_through_rate: 1
   cost_per_click: 1
   spend: 1
-  seven_days_total_sales: 1
+  seven_day_total_sales: 1
   total_advertising_cost_of_sales: 1

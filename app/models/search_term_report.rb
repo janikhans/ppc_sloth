@@ -4,10 +4,8 @@ class SearchTermReport < Report
     foreign_key: :report_id
 
   def import!
+    return unless analyzed?
     return if imported?
-    SearchTermReportImporter.new(
-      path: ActiveStorage::Blob.service.send(:path_for, file.key),
-      report: self
-    ).import!
+    SearchTermReportImporter.new(self).import!
   end
 end

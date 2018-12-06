@@ -38,7 +38,7 @@ class ReportsController < ApplicationController
 
   def import
     @report.import!
-    redirect_to @report, notice: 'Report was successfully imported.'
+    redirect_to @report.becomes(Report), notice: 'Report was successfully imported.'
   end
 
   def analyze

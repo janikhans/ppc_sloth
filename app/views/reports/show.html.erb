@@ -23,7 +23,7 @@
           <p><strong>Type:</strong> <%= @report.type %></p>
           <p><strong>Period:</strong> <%= @report.period_start.strftime('%b %d, %Y') %> - <%= @report.period_end.strftime('%b %d, %Y') %></p>
           <% if @report.imported? %>
-            <p><strong>Imported:</strong> <%= @report.imported.strftime('%b %d, %Y') %></p>
+            <p><strong>Imported:</strong> <%= @report.imported_at.strftime('%b %d, %Y') %></p>
           <% else %>
             <%= link_to 'Import Now', import_report_path(@report), method: :post, class: 'btn btn-primary' %>
           <% end %>

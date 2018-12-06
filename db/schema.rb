@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.integer "click_through_rate"
     t.integer "cost_per_click"
     t.integer "spend"
-    t.integer "seven_days_total_sales"
+    t.integer "seven_day_total_sales"
     t.integer "total_advertising_cost_of_sales"
     t.integer "total_return_on_advertising_spend"
     t.integer "seven_day_total_orders"
