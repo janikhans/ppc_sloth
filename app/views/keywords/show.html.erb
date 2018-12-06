@@ -1,0 +1,21 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Keywords', path: nil },
+  { text: @keyword.text, path: nil }
+]) %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <p><strong>Keyword:</strong> <%= @keyword.text  %></p>
+        <p><strong>First Recorded:</strong> <%= @keyword.created_at.strftime('%b %d, %Y') %></p>
+        <% if @keyword.auto? %>
+          <p><strong>Auto Keyword</strong></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'search_term_report_items/table', locals: { items: @search_term_report_items } %>

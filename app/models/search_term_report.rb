@@ -7,6 +7,10 @@ class SearchTermReport < ApplicationRecord
     imported.present?
   end
 
+  def filename
+    file.blob.filename
+  end
+
   def import!
     return if imported?
     SearchTermReportImporter.new(

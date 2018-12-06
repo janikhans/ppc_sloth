@@ -29,6 +29,13 @@ class SearchTermReportImporter
 
   import do
     import_rows!
+    period_start = search_term_report.items.order(date: :asc).first.date
+    period_end = search_term_report.items.order(date: :desc).first.date
+    search_term_report.update(
+      imported: Time.current,
+      period_start: period_start,
+      period_end: period_end
+    )
   end
 
   rows do |row|
@@ -49,8 +56,6 @@ class SearchTermReportImporter
     row.campaign.save if row.campaign.new_record?
     row.search_term.save if row.search_term.new_record?
     item.save if item.changed?
-
-    search_term_report.update(imported: Time.current)
   end
 
   errors do |error, line_number|
@@ -70,7 +75,3 @@ class SearchTermReportImporter
     value.downcase
   end
 end
-
-
-# Date,Currency,Campaign Name,Ad Group Name,Targeting,Match Type,Customer Search Term,Impressions,Clicks,
-# Click-Thru Rate (CTR),Cost Per Click (CPC),Spend,7 Day Total Sales ,Total Advertising Cost of Sales (ACoS) ,Total Return on Advertising Spend (RoAS),7 Day Total Orders (#),7 Day Total Units (#),7 Day Conversion Rate,7 Day Advertised SKU Units (#),7 Day Other SKU Units (#),7 Day Advertised SKU Sales ,7 Day Other SKU Sales

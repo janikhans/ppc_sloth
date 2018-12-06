@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
+    t.boolean "auto", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.bigint "ad_group_id"
     t.string "text", null: false
     t.integer "match_type", default: 0
+    t.boolean "auto", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ad_group_id"], name: "index_keywords_on_ad_group_id"
@@ -90,7 +92,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
   end
 
   create_table "search_term_reports", force: :cascade do |t|
-    t.string "name"
+    t.date "period_start"
+    t.date "period_end"
     t.datetime "imported"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -98,6 +101,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
 
   create_table "search_terms", force: :cascade do |t|
     t.string "text"
+    t.boolean "asin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

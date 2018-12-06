@@ -5,7 +5,7 @@
 ]) %>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-header d-flex justify-content-between">
         Campaign
@@ -19,15 +19,32 @@
       </div>
     </div>
   </div>
-
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        Ad Groups
-      </div>
-      <ul class="list-group list-group-flush">
-        <%= render @ad_groups %>
-      </ul>
-    </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Ad Groups</h3>
   </div>
+</div>
+
+<div class="row">
+  <% @ad_groups.each do |ad_group| %>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <%= ad_group.name %>
+        </div>
+        <div class="card-body">
+          <% match_types = ad_group.keywords.group_by(&:match_type) %>
+          <% match_types.each do |match_type, keywords| %>
+            <h4>Match Type: <%= match_type %></h4>
+            <ul class="list-group">
+              <% keywords.each do |keyword| %>
+                <li class="list-group-item"><%= link_to keyword.text, keyword %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

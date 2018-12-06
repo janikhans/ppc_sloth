@@ -1,13 +1,13 @@
 <%= breadcrumbs_helper([
   { text: 'Dashboard', path: root_path },
   { text: 'Search Term Reports', path: search_term_reports_path },
-  { text: @search_term_report.name, path: nil }
+  { text: @search_term_report.filename, path: nil }
 ]) %>
 
 <div class="row">
   <div class="col-md-6">
     <div class="card">
-      <div class="card-header d-flex justify-content-between">
+      <div class="card-header d-flex justify-content-between align-items-center">
         Search Term Report
         <div class="btn-group">
           <%= link_to 'Edit', edit_search_term_report_path(@search_term_report), class: 'btn btn-sm btn-secondary' %>
@@ -16,21 +16,15 @@
       </div>
       <div class="card-body">
         <p>
-          <strong>Name:</strong>
-          <%= @search_term_report.name  %>
-        </p>
-        <p>
           <strong>File:</strong>
           <%= link_to @search_term_report.file.blob.filename, rails_blob_path(@search_term_report.file, disposition: "attachment")  %>
         </p>
-        <p>
-          <strong>Imported:</strong>
-          <% if @search_term_report.imported? %>
-            <%= @search_term_report.imported %>
-          <% else %>
-            <%= link_to 'Import Now', import_search_term_report_path(@search_term_report), method: :post  %>
-          <% end %>
-        </p>
+        <% if @search_term_report.imported? %>
+          <p><strong>Imported:</strong> <%= @search_term_report.imported.strftime('%b %d, %Y') %></p>
+          <p><strong>Period:</strong> <%= @search_term_report.period_start.strftime('%b %d, %Y') %> - <%= @search_term_report.period_end.strftime('%b %d, %Y') %></p>
+        <% else %>
+          <%= link_to 'Import Now', import_search_term_report_path(@search_term_report), method: :post, class: 'btn btn-primary' %>
+        <% end %>
       </div>
     </div>
   </div>

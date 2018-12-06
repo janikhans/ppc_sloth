@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :search_terms, only: [:index, :show]
   resources :ad_groups
   resources :campaigns
+  resources :keywords, only: [:index, :show]
 end

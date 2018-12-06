@@ -1,6 +1,6 @@
 class SearchTermsController < ApplicationController
   def index
-    @search_terms = SearchTerm.with_stats.order('ctr desc')
+    @search_terms = SearchTerm.with_stats.order('impressions desc')
   end
 
   def show

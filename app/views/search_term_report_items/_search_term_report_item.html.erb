@@ -1,7 +1,9 @@
 <tr>
-  <td><%= search_term_report_item.ad_group.campaign.name %></td>
-  <td><%= search_term_report_item.ad_group.name %></td>
-  <td><%= search_term_report_item.date %></td>
+  <td><%= link_to search_term_report_item.ad_group.campaign.name, search_term_report_item.ad_group.campaign %></td>
+  <td><%= link_to search_term_report_item.ad_group.name, search_term_report_item.ad_group %></td>
+  <td><%= link_to search_term_report_item.search_term.text, search_term_report_item.search_term %></td>
+  <td><%= link_to search_term_report_item.keyword.text, search_term_report_item.keyword %></td>
+  <td><%= search_term_report_item.date.strftime('%b %d, %Y') %></td>
   <td><%= search_term_report_item.impressions %></td>
   <td><%= search_term_report_item.clicks %></td>
 </tr>

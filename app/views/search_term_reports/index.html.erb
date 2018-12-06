@@ -3,14 +3,25 @@
   { text: 'Search Term Reports', path: search_term_reports_path }
 ]) %>
 
-<div class="card">
-  <div class="card-header">
-    <i class="fas fa-table"></i>
-    Search Term Reports
-    <%= link_to 'Upload Search Term Report', new_search_term_report_path %>
+<div class="row">
+  <div class="col-md-12">
+      <%= link_to 'Upload Search Term Report', new_search_term_report_path, class: 'btn btn-sm btn-success' %>
   </div>
-  <ul class="list-group list-group-flush">
-    <%= render @search_term_reports %>
-  </ul>
-  <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-12">
+    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Period</th>
+          <th>Imported</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @search_term_reports %>
+      </tbody>
+    </table>
+  </div>
 </div>

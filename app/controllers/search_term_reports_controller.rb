@@ -59,6 +59,6 @@ class SearchTermReportsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def search_term_report_params
-      params.require(:search_term_report).permit(:name, :file)
+      params.require(:search_term_report).permit(:file)
     end
 end

@@ -25,7 +25,9 @@
         Keywords
       </div>
       <ul class="list-group list-group-flush">
-        <%= render @keywords %>
+        <% @keywords.each do |keyword| %>
+          <li class="list-group-item"><%= link_to keyword.text, keyword %></li>
+        <% end %>
       </ul>
     </div>
   </div>

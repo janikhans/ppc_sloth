@@ -1,5 +1,8 @@
 class SearchTerm < ApplicationRecord
+  scope :asin, -> { where(asin: true) }
+  
   has_many :search_term_report_items
+  before_validation :check_if_asin
 
   scope :with_stats, lambda {
     select('search_terms.*, report_stats.*, CASE report_stats.impressions WHEN 0 THEN 0 ELSE (report_stats.clicks::FLOAT / report_stats.impressions) END AS ctr')
@@ -13,4 +16,11 @@ class SearchTerm < ApplicationRecord
         SQL
       )
   }
+
+  private
+
+  def check_if_asin
+    return unless text.present?
+    self.asin = text.match(/(b0)\w+/)
+  end
 end

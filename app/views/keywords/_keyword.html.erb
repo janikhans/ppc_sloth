@@ -1,1 +1,9 @@
-<li class="list-group-item"><%= keyword.text %> <small>(<%= keyword.match_type %>)</small></li>
+<tr>
+  <td><%= link_to keyword.campaign.name, keyword.campaign %></td>
+  <td><%= link_to keyword.ad_group.name, keyword.ad_group %></td>
+  <td><%= link_to keyword.text, keyword %></td>
+  <td><%= keyword.reported_days %></td>
+  <td><%= keyword.impressions %></td>
+  <td><%= keyword.clicks %></td>
+  <td><%= keyword.ctr %></td>
+</tr>
