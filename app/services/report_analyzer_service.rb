@@ -1,7 +1,6 @@
 class ReportAnalyzerService
-  def initialize(report, file)
+  def initialize(report)
     @report = report
-    @file = file
   end
 
   def call
@@ -17,7 +16,10 @@ class ReportAnalyzerService
   private
 
   def instantiate_file
-    @xlsx = Roo::Spreadsheet.open(@file)
+    @xlsx = Roo::Spreadsheet.open(
+      ActiveStorage::Blob.service.send(:path_for, @report.file.key),
+      extension: :xlsx
+    )
   end
 
   def determine_period
@@ -39,7 +41,7 @@ class ReportAnalyzerService
     when ['Sponsored Product Advertised Pr']
       AdvertisedProductReport
     when ['Sponsored Product Keyword Repor']
-      ProductTargetingReport
+      TargetingReport
     else
       # shit
     end
@@ -49,7 +51,8 @@ class ReportAnalyzerService
     @report.update(
       type: report_type,
       period_start: @period_start,
-      period_end: @period_end
+      period_end: @period_end,
+      analyzed_at: Time.current
     )
   end
 end

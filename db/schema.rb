@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.string "type"
     t.date "period_start"
     t.date "period_end"
-    t.datetime "analyzed"
-    t.datetime "imported"
+    t.datetime "analyzed_at"
+    t.datetime "imported_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

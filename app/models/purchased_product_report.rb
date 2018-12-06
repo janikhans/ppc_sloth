@@ -1,0 +1,3 @@
+class PurchasedProductReport < Report
+
+end

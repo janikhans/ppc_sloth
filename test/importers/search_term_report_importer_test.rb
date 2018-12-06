@@ -70,7 +70,7 @@ class SearchTermReportImporterTest < ActiveSupport::TestCase
   end
 
   test 'should create search term report item' do
-    assert_differences [['ReportItem.count', 1]] do
+    assert_differences [['SearchTermReportItem.count', 1]] do
       @new_report.import!
     end
   end

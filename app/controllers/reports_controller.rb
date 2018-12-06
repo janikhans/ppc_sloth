@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :edit, :update, :destroy, :import]
+  before_action :set_report, only: [:show, :edit, :update, :destroy, :import, :analyze]
 
   def index
     @reports = Report.all
@@ -39,6 +39,11 @@ class ReportsController < ApplicationController
   def import
     @report.import!
     redirect_to @report, notice: 'Report was successfully imported.'
+  end
+
+  def analyze
+    @report.analyze!
+    redirect_to @report.becomes(Report), notice: 'Report was successfully analyzed.'
   end
 
   private

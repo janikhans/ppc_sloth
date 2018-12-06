@@ -32,7 +32,7 @@ class SearchTermReportImporter
     period_start = report.items.order(date: :asc).first.date
     period_end = report.items.order(date: :desc).first.date
     report.update(
-      imported: Time.current,
+      imported_at: Time.current,
       period_start: period_start,
       period_end: period_end
     )

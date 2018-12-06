@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
+  type: SearchTermReport
 
 two:
-  id: 2
+  type: AdvertisedProductReport
+
+three:
+  id: 3

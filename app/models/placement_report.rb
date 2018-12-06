@@ -1,0 +1,3 @@
+class PlacementReport < Report
+
+end

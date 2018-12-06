@@ -1,0 +1,3 @@
+class PerformanceOverTimeReport < Report
+
+end

@@ -19,12 +19,16 @@
           <strong>File:</strong>
           <%= link_to @report.file.blob.filename, rails_blob_path(@report.file, disposition: "attachment")  %>
         </p>
-        <p><strong>Type:</strong> <%= @report.type %></p>
-        <% if @report.imported? %>
-          <p><strong>Imported:</strong> <%= @report.imported.strftime('%b %d, %Y') %></p>
+        <% if @report.analyzed? %>
+          <p><strong>Type:</strong> <%= @report.type %></p>
           <p><strong>Period:</strong> <%= @report.period_start.strftime('%b %d, %Y') %> - <%= @report.period_end.strftime('%b %d, %Y') %></p>
+          <% if @report.imported? %>
+            <p><strong>Imported:</strong> <%= @report.imported.strftime('%b %d, %Y') %></p>
+          <% else %>
+            <%= link_to 'Import Now', import_report_path(@report), method: :post, class: 'btn btn-primary' %>
+          <% end %>
         <% else %>
-          <%= link_to 'Import Now', import_report_path(@report), method: :post, class: 'btn btn-primary' %>
+          <%= link_to 'Analyze Now', analyze_report_path(@report), method: :post, class: 'btn btn-primary' %>
         <% end %>
       </div>
     </div>

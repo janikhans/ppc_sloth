@@ -1,0 +1,3 @@
+class AdvertisedProductReport < Report
+
+end

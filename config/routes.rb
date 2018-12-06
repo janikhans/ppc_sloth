@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :reports do
     post :import, on: :member
+    post :analyze, on: :member
   end
   resources :search_terms, only: [:index, :show]
   resources :ad_groups

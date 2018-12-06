@@ -1,21 +1,19 @@
 class Report < ApplicationRecord
   has_one_attached :file
 
-  has_many :items, class_name: 'SearchTermReportItem'
+  def analyzed?
+    analyzed_at.present?
+  end
 
   def imported?
-    imported.present?
+    imported_at.present?
   end
 
   def filename
     file.blob.filename
   end
 
-  def import!
-    return if imported?
-    SearchTermReportImporter.new(
-      path: ActiveStorage::Blob.service.send(:path_for, file.key),
-      report: self
-    ).import!
+  def analyze!
+    ReportAnalyzerService.new(self).call
   end
 end

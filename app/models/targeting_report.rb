@@ -1,0 +1,3 @@
+class TargetingReport < Report
+
+end
