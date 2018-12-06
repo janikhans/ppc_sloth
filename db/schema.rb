@@ -61,8 +61,18 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.index ["ad_group_id"], name: "index_keywords_on_ad_group_id"
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.string "type"
+    t.date "period_start"
+    t.date "period_end"
+    t.datetime "analyzed"
+    t.datetime "imported"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "search_term_report_items", force: :cascade do |t|
-    t.bigint "search_term_report_id"
+    t.bigint "report_id"
     t.bigint "ad_group_id"
     t.bigint "keyword_id"
     t.bigint "search_term_id"
@@ -87,16 +97,8 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.datetime "updated_at", null: false
     t.index ["ad_group_id"], name: "index_search_term_report_items_on_ad_group_id"
     t.index ["keyword_id"], name: "index_search_term_report_items_on_keyword_id"
+    t.index ["report_id"], name: "index_search_term_report_items_on_report_id"
     t.index ["search_term_id"], name: "index_search_term_report_items_on_search_term_id"
-    t.index ["search_term_report_id"], name: "index_search_term_report_items_on_search_term_report_id"
-  end
-
-  create_table "search_term_reports", force: :cascade do |t|
-    t.date "period_start"
-    t.date "period_end"
-    t.datetime "imported"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "search_terms", force: :cascade do |t|
@@ -110,6 +112,6 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
   add_foreign_key "keywords", "ad_groups"
   add_foreign_key "search_term_report_items", "ad_groups"
   add_foreign_key "search_term_report_items", "keywords"
-  add_foreign_key "search_term_report_items", "search_term_reports"
+  add_foreign_key "search_term_report_items", "reports"
   add_foreign_key "search_term_report_items", "search_terms"
 end

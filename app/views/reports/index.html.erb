@@ -1,11 +1,11 @@
 <%= breadcrumbs_helper([
   { text: 'Dashboard', path: root_path },
-  { text: 'Search Term Reports', path: search_term_reports_path }
+  { text: ' Reports', path: reports_path }
 ]) %>
 
 <div class="row">
   <div class="col-md-12">
-      <%= link_to 'Upload Search Term Report', new_search_term_report_path, class: 'btn btn-sm btn-success' %>
+      <%= link_to 'Upload Report', new_report_path, class: 'btn btn-sm btn-success' %>
   </div>
 </div>
 
@@ -15,12 +15,13 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Type</th>
           <th>Period</th>
           <th>Imported</th>
         </tr>
       </thead>
       <tbody>
-        <%= render @search_term_reports %>
+        <%= render @reports %>
       </tbody>
     </table>
   </div>

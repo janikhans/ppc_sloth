@@ -1,6 +1,6 @@
 class SearchTermReportImporter
   include CSVParty
-  depends_on :search_term_report
+  depends_on :report
 
   column :date, header: 'Date', as: :date
   column :currency, header: 'Currency'
@@ -29,9 +29,9 @@ class SearchTermReportImporter
 
   import do
     import_rows!
-    period_start = search_term_report.items.order(date: :asc).first.date
-    period_end = search_term_report.items.order(date: :desc).first.date
-    search_term_report.update(
+    period_start = report.items.order(date: :asc).first.date
+    period_end = report.items.order(date: :desc).first.date
+    report.update(
       imported: Time.current,
       period_start: period_start,
       period_end: period_end
@@ -47,7 +47,7 @@ class SearchTermReportImporter
     )
 
     item.assign_attributes(
-      search_term_report: search_term_report,
+      report: report,
       currency: row.currency,
       impressions: row.impressions,
       clicks: row.clicks

@@ -22,16 +22,16 @@
 # end
 
 
-# report = SearchTermReport.new(name: 'Test Report')
+# report = Report.new(name: 'Test Report')
 # report.file.attach(
-#   io: File.open(File.join(Rails.root, '/test/fixtures/files/search_term_report.csv')),
-#   filename: 'search_term_report.csv'
+#   io: File.open(File.join(Rails.root, '/test/fixtures/files/report.csv')),
+#   filename: 'report.csv'
 # )
 # report.save
 # report.import!
 
 
 # SearchTermReportImporter.new(
-#   path: File.join(Rails.root, '/test/fixtures/files/search_term_report.csv'),
-#   search_term_report: report
+#   path: File.join(Rails.root, '/test/fixtures/files/report.csv'),
+#   report: report
 # ).import!

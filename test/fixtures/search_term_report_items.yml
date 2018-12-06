@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  report: one
   ad_group: one
   keyword: one
   search_term: one
@@ -14,6 +15,7 @@ one:
   total_advertising_cost_of_sales: 1
 
 two:
+  report: one
   ad_group: two
   keyword: two
   search_term: two

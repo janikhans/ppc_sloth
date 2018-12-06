@@ -1,0 +1,43 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Reports', path: reports_path },
+  { text: @report.filename, path: nil }
+]) %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        Report
+        <div class="btn-group">
+          <%= link_to 'Edit', edit_report_path(@report), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', report_path(@report), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>File:</strong>
+          <%= link_to @report.file.blob.filename, rails_blob_path(@report.file, disposition: "attachment")  %>
+        </p>
+        <p><strong>Type:</strong> <%= @report.type %></p>
+        <% if @report.imported? %>
+          <p><strong>Imported:</strong> <%= @report.imported.strftime('%b %d, %Y') %></p>
+          <p><strong>Period:</strong> <%= @report.period_start.strftime('%b %d, %Y') %> - <%= @report.period_end.strftime('%b %d, %Y') %></p>
+        <% else %>
+          <%= link_to 'Import Now', import_report_path(@report), method: :post, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Keywords
+      </div>
+      <ul class="list-group list-group-flush">
+        <%#= render @ad_groups %>
+      </ul>
+    </div>
+  </div>
+</div>

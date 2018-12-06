@@ -2,15 +2,15 @@ require 'test_helper'
 
 class SearchTermReportImporterTest < ActiveSupport::TestCase
   setup do
-    @report = search_term_reports(:one)
+    @report = reports(:one)
     @existing_report = SearchTermReportImporter.new(
       path: file_data('existing_report.csv'),
-      search_term_report: @report
+      report: @report
     )
 
     @new_report = SearchTermReportImporter.new(
       path: file_data('new_report.csv'),
-      search_term_report: @report
+      report: @report
     )
   end
   test 'should import report' do
@@ -70,7 +70,7 @@ class SearchTermReportImporterTest < ActiveSupport::TestCase
   end
 
   test 'should create search term report item' do
-    assert_differences [['SearchTermReportItem.count', 1]] do
+    assert_differences [['ReportItem.count', 1]] do
       @new_report.import!
     end
   end

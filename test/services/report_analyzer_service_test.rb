@@ -2,10 +2,10 @@ require 'test_helper'
 
 class ReportAnalyzerServiceTest < ActiveSupport::TestCase
   setup do
-    @report = search_term_reports(:one)
+    @report = reports(:two)
     @service = ReportAnalyzerService.new(
       @report,
-      file_data('search_term_report.xlsx')
+      file_data('report.xlsx')
     )
   end
   test 'should analyze report file' do

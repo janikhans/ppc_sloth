@@ -1,7 +1,7 @@
 class CreateSearchTermReportItems < ActiveRecord::Migration[5.2]
   def change
     create_table :search_term_report_items do |t|
-      t.references :search_term_report, foreign_key: true
+      t.references :report, foreign_key: true
       t.references :ad_group, foreign_key: true
       t.references :keyword, foreign_key: true
       t.references :search_term, foreign_key: true
