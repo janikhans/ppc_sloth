@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sku: one
+  ad_group: one
+  amazon_id: MyString
+  status: 1
+
+two:
+  sku: two
+  ad_group: two
+  amazon_id: MyString
+  status: 1

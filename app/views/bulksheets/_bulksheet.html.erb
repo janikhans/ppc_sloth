@@ -1,0 +1,17 @@
+<tr>
+  <td><%= link_to bulksheet.filename, bulksheet_path(bulksheet) %></td>
+  <% if bulksheet.analyzed? %>
+    <td><%= bulksheet.analyzed_at.strftime('%b %d, %Y') %></td>
+  <% else %>
+    <td><%= link_to 'Analyze', analyze_bulksheet_path(bulksheet), method: :post, class: 'btn btn-sm btn-primary' %></td>
+  <% end %>
+  <% if bulksheet.imported? %>
+    <td><%= bulksheet.imported_at.strftime('%b %d, %Y') %></td>
+  <% elsif bulksheet.analyzed? && bulksheet.file_format_valid? %>
+    <td><%= link_to 'Import Now', import_bulksheet_path(bulksheet), method: :post, class: 'btn btn-sm btn-primary' %></td>
+  <% elsif bulksheet.analyzed? && !bulksheet.file_format_valid? %>
+    <td><strong>There's something wrong with this file type</strong></td>
+  <% else %>
+    <td>Analyze first</td>
+  <% end %>
+</tr>

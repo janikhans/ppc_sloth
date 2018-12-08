@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sku.name %>
+</p>
+
+<p>
+  <strong>Asin:</strong>
+  <%= @sku.asin %>
+</p>
+
+<%= link_to 'Edit', edit_sku_path(@sku) %> |
+<%= link_to 'Back', skus_path %>

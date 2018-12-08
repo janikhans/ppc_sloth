@@ -1,4 +1,6 @@
 class Keyword < ApplicationRecord
+  include Statusable
+
   scope :auto, -> { where(auto: true) }
 
   scope :with_stats, lambda {
@@ -24,7 +26,9 @@ class Keyword < ApplicationRecord
   enum match_type: {
     broad: 0,
     phrase: 1,
-    exact: 2
+    exact: 2,
+    negative_phrase: 3,
+    negative_exact: 4
   }
 
   private

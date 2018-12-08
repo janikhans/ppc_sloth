@@ -1,7 +1,13 @@
 <%= breadcrumbs_helper([
   { text: 'Dashboard', path: root_path },
-  { text: 'Campaigns', path: campaigns_path }
+  { text: 'Bulksheets', path: bulksheets_path }
 ]) %>
+
+<div class="row">
+  <div class="col-md-12">
+      <%= link_to 'Upload Bulksheet', new_bulksheet_path, class: 'btn btn-sm btn-success' %>
+  </div>
+</div>
 
 <div class="row mt-3">
   <div class="col-md-12">
@@ -9,12 +15,12 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Targeting Type</th>
-          <th>Status</th>
+          <th>Analyzed</th>
+          <th>Imported</th>
         </tr>
       </thead>
       <tbody>
-        <%= render partial: 'campaign', collection: @campaigns %>
+        <%= render partial: 'bulksheet', collection: @bulksheets %>
       </tbody>
     </table>
   </div>

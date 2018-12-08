@@ -1,1 +1,5 @@
-<li class="list-group-item"><%= link_to campaign.name, campaign_path(campaign) %></li>
+<tr>
+  <td><%= link_to campaign.name, campaign_path(campaign) %></td>
+  <td><%= campaign.targeting_type %></td>
+  <td><%= campaign.status %></td>
+</tr>

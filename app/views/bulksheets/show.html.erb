@@ -1,0 +1,36 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Bulkshsets', path: bulksheets_path },
+  { text: @bulksheet.filename, path: nil }
+]) %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        Bulkshset
+        <div class="btn-group">
+          <%= link_to 'Edit', edit_bulksheet_path(@bulksheet), class: 'btn btn-sm btn-secondary' %>
+          <%= link_to 'Delete', bulksheet_path(@bulksheet), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>File:</strong>
+          <%= link_to @bulksheet.file.blob.filename, rails_blob_path(@bulksheet.file, disposition: "attachment")  %>
+        </p>
+        <% if @bulksheet.analyzed? %>
+          <% if @bulksheet.imported? %>
+            <p><strong>Imported:</strong> <%= @bulksheet.imported_at.strftime('%b %d, %Y') %></p>
+          <% elsif @bulksheet.file_format_valid? %>
+            <%= link_to 'Import Now', import_bulksheet_path(@bulksheet), method: :post, class: 'btn btn-primary' %>
+          <% else %>
+            <p><strong>There is something wrong with this file format.</strong></p>
+          <% end %>
+        <% else %>
+          <%= link_to 'Analyze Now', analyze_bulksheet_path(@bulksheet), method: :post, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

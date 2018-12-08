@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_053351) do
+ActiveRecord::Schema.define(version: 2018_12_08_192230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,16 +39,42 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
   create_table "ad_groups", force: :cascade do |t|
     t.bigint "campaign_id"
     t.string "name"
+    t.integer "status", default: 0
+    t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["amazon_id"], name: "index_ad_groups_on_amazon_id"
     t.index ["campaign_id"], name: "index_ad_groups_on_campaign_id"
+  end
+
+  create_table "ads", force: :cascade do |t|
+    t.bigint "sku_id"
+    t.bigint "ad_group_id"
+    t.integer "status", default: 0
+    t.bigint "amazon_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_group_id"], name: "index_ads_on_ad_group_id"
+    t.index ["amazon_id"], name: "index_ads_on_amazon_id"
+    t.index ["sku_id"], name: "index_ads_on_sku_id"
+  end
+
+  create_table "bulksheets", force: :cascade do |t|
+    t.boolean "file_format_valid"
+    t.datetime "analyzed_at"
+    t.datetime "imported_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
-    t.boolean "auto", default: false
+    t.integer "targeting_type", default: 0
+    t.integer "status", default: 0
+    t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["amazon_id"], name: "index_campaigns_on_amazon_id"
   end
 
   create_table "keywords", force: :cascade do |t|
@@ -56,9 +82,12 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.string "text", null: false
     t.integer "match_type", default: 0
     t.boolean "auto", default: false
+    t.integer "status", default: 0
+    t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ad_group_id"], name: "index_keywords_on_ad_group_id"
+    t.index ["amazon_id"], name: "index_keywords_on_amazon_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -108,7 +137,18 @@ ActiveRecord::Schema.define(version: 2018_11_20_053351) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "skus", force: :cascade do |t|
+    t.string "name"
+    t.string "asin"
+    t.bigint "amazon_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["amazon_id"], name: "index_skus_on_amazon_id"
+  end
+
   add_foreign_key "ad_groups", "campaigns"
+  add_foreign_key "ads", "ad_groups"
+  add_foreign_key "ads", "skus"
   add_foreign_key "keywords", "ad_groups"
   add_foreign_key "search_term_report_items", "ad_groups"
   add_foreign_key "search_term_report_items", "keywords"

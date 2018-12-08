@@ -5,6 +5,8 @@ class CreateKeywords < ActiveRecord::Migration[5.2]
       t.string :text, null: false
       t.integer :match_type, default: 0
       t.boolean :auto, default: false
+      t.integer :status, default: 0
+      t.integer :amazon_id, limit: 8, index: true
 
       t.timestamps
     end

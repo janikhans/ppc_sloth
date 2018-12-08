@@ -9,7 +9,7 @@ class SearchTermReportImporter
     @xlsx.parse(headers: true)[1..-1].each do |row|
       @date = row['Date']
       @currency = row['Currency']
-      @match_type = parse_match_type(row['Match Type'])
+      @match_type = parse_keyword_match_type(row['Match Type'])
       @impressions = row['Impressions']
       @clicks = row['Clicks']
       @campaign = Campaign.find_or_initialize_by(name: row['Campaign Name'])
@@ -71,8 +71,8 @@ class SearchTermReportImporter
     (value * 100).to_i
   end
 
-  def parse_match_type(value)
+  def parse_keyword_match_type(value)
     return if value.blank?
-    value.downcase
+    value.underscore.tr(' ', '_')
   end
 end

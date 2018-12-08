@@ -1,7 +1,13 @@
 <%= breadcrumbs_helper([
   { text: 'Dashboard', path: root_path },
-  { text: 'Campaigns', path: campaigns_path }
+  { text: 'SKUs', path: skus_path }
 ]) %>
+
+<div class="row">
+  <div class="col-md-12">
+      <%= link_to 'New Sku', new_sku_path, class: 'btn btn-sm btn-success' %>
+  </div>
+</div>
 
 <div class="row mt-3">
   <div class="col-md-12">
@@ -9,12 +15,11 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Targeting Type</th>
-          <th>Status</th>
+          <th>Asin</th>
         </tr>
       </thead>
       <tbody>
-        <%= render partial: 'campaign', collection: @campaigns %>
+        <%= render partial: 'sku', collection: @skus %>
       </tbody>
     </table>
   </div>

@@ -12,10 +12,9 @@
         <%= link_to 'Edit', edit_campaign_path(@campaign) %>
       </div>
       <div class="card-body">
-        <p>
-          <strong>Name:</strong>
-          <%= @campaign.name %>
-        </p>
+        <p><strong>Name:</strong> <%= @campaign.name %></p>
+        <p><strong>Targeting Type:</strong> <%= @campaign.targeting_type %></p>
+        <p><strong>Status:</strong> <%= @campaign.status %></p>
       </div>
     </div>
   </div>
@@ -28,21 +27,10 @@
 
 <div class="row">
   <% @ad_groups.each do |ad_group| %>
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="card">
         <div class="card-header">
-          <%= ad_group.name %>
-        </div>
-        <div class="card-body">
-          <% match_types = ad_group.keywords.group_by(&:match_type) %>
-          <% match_types.each do |match_type, keywords| %>
-            <h4>Match Type: <%= match_type %></h4>
-            <ul class="list-group">
-              <% keywords.each do |keyword| %>
-                <li class="list-group-item"><%= link_to keyword.text, keyword %></li>
-              <% end %>
-            </ul>
-          <% end %>
+          <%= link_to ad_group.name, ad_group %>
         </div>
       </div>
     </div>
