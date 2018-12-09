@@ -19,4 +19,15 @@ class ReportAnalyzerServiceTest < ActiveSupport::TestCase
       assert_equal @report.type, file.gsub('.xlsx', '').camelize
     end
   end
+
+  test 'should correctly identify wrong report type' do
+    file = 'bulksheet.xlsx'
+    @report.file.attach(io: File.open(file_data(file)), filename: file)
+
+    assert_not_equal @report.type, 'UnknownReport'
+
+    ReportAnalyzerService.new(@report).call
+
+    assert_equal @report.type, 'UnknownReport'
+  end
 end

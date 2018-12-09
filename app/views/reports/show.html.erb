@@ -21,11 +21,15 @@
         </p>
         <% if @report.analyzed? %>
           <p><strong>Type:</strong> <%= @report.type %></p>
-          <p><strong>Period:</strong> <%= @report.period_start.strftime('%b %d, %Y') %> - <%= @report.period_end.strftime('%b %d, %Y') %></p>
-          <% if @report.imported? %>
-            <p><strong>Imported:</strong> <%= @report.imported_at.strftime('%b %d, %Y') %></p>
+          <% if @report.type == 'UnknownReport' %>
+            <p><strong>Something is wrong with this report</strong></p>
           <% else %>
-            <%= link_to 'Import Now', import_report_path(@report), method: :post, class: 'btn btn-primary' %>
+            <p><strong>Period:</strong> <%= @report.period_start.strftime('%b %d, %Y') %> - <%= @report.period_end.strftime('%b %d, %Y') %></p>
+            <% if @report.imported? %>
+              <p><strong>Imported:</strong> <%= @report.imported_at.strftime('%b %d, %Y') %></p>
+            <% else %>
+              <%= link_to 'Import Now', import_report_path(@report), method: :post, class: 'btn btn-primary' %>
+            <% end %>
           <% end %>
         <% else %>
           <%= link_to 'Analyze Now', analyze_report_path(@report), method: :post, class: 'btn btn-primary' %>

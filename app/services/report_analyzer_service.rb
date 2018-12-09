@@ -4,9 +4,19 @@ class ReportAnalyzerService
   end
 
   def call
-    instantiate_file
-    determine_period
-    update_report
+    xlsx = instantiate_file
+    @report.type = determine_report_type(xlsx)
+
+    unless @report.type == 'UnknownReport'
+      dates = determine_dates(xlsx)
+      @report.assign_attributes(
+        period_start: dates.first,
+        period_end: dates.last
+      )
+    end
+
+    @report.analyzed_at = Time.current
+    @report.save
 
     OpenStruct.new(success?: true, error: nil, report: @report)
   rescue StandardError => e
@@ -16,20 +26,18 @@ class ReportAnalyzerService
   private
 
   def instantiate_file
-    @xlsx = Roo::Spreadsheet.open(
+    Roo::Spreadsheet.open(
       ActiveStorage::Blob.service.send(:path_for, @report.file.key),
       extension: :xlsx
     )
   end
 
-  def determine_period
-    dates = @xlsx.column(1)[1..-1].sort!
-    @period_start = dates.first
-    @period_end = dates.last
+  def determine_dates(xlsx)
+    xlsx.column(1)[1..-1].sort!
   end
 
-  def report_type
-    case @xlsx.sheets
+  def determine_report_type(xlsx)
+    case xlsx.sheets
     when ['Sponsored Product Search Term R']
       SearchTermReport
     when ['Sponsored Product Performance O']
@@ -43,16 +51,7 @@ class ReportAnalyzerService
     when ['Sponsored Product Keyword Repor']
       TargetingReport
     else
-      # shit
+      UnknownReport
     end
-  end
-
-  def update_report
-    @report.update(
-      type: report_type,
-      period_start: @period_start,
-      period_end: @period_end,
-      analyzed_at: Time.current
-    )
   end
 end

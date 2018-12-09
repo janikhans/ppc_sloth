@@ -1,6 +1,14 @@
 class Report < ApplicationRecord
   has_one_attached :file
 
+  def self.importable?
+    false
+  end
+
+  def importable?
+    self.class.importable?
+  end
+
   def analyzed?
     analyzed_at.present?
   end
@@ -15,5 +23,12 @@ class Report < ApplicationRecord
 
   def analyze!
     ReportAnalyzerService.new(self).call
+  end
+
+  def import!
+    return unless importable? && analyzed?
+    return if imported?
+    klass = (self.class.name + 'Importer').constantize
+    klass.new(self).import!
   end
 end

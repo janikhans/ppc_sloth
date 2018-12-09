@@ -1,0 +1,10 @@
+<tr>
+  <td><%= link_to search_term_report.filename, search_term_report_path(search_term_report) %></td>
+  <td><%= search_term_report.type %></td>
+  <td><%= search_term_report.period_start.strftime('%b %d, %Y') %> - <%= search_term_report.period_end.strftime('%b %d, %Y') %></td>
+  <% if search_term_report.imported? %>
+    <td><%= search_term_report.imported_at.strftime('%b %d, %Y') %></td>
+  <% else %>
+    <td><%= link_to 'Import Now', import_search_term_report_path(search_term_report), method: :post, class: 'btn btn-sm btn-primary' %></td>
+  <% end %>
+</tr>

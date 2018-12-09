@@ -1,17 +1,6 @@
 <tr>
   <td><%= link_to report.filename, report_path(report) %></td>
-  <% if report.analyzed? %>
-    <td><%= report.type %></td>
-    <td><%= report.period_start.strftime('%b %d, %Y') %> - <%= report.period_end.strftime('%b %d, %Y') %></td>
-  <% else %>
-    <td><%= link_to 'Analyze', analyze_report_path(report), method: :post, class: 'btn btn-sm btn-primary' %></td>
-    <td></td>
-  <% end %>
-  <% if report.analyzed? && report.imported? %>
-    <td><%= report.imported_at.strftime('%b %d, %Y') %></td>
-  <% elsif report.analyzed? %>
-    <td><%= link_to 'Import Now', import_report_path(report), method: :post, class: 'btn btn-sm btn-primary' %></td>
-  <% else %>
-    <td></td>
-  <% end %>
+  <td><%= link_to 'Analyze', analyze_report_path(report), method: :post, class: 'btn btn-sm btn-primary' %></td>
+  <td></td>
+  <td></td>
 </tr>
