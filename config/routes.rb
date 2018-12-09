@@ -6,7 +6,15 @@ Rails.application.routes.draw do
     post :analyze, on: :member
   end
 
-  resources :search_terms, only: [:index, :show]
+  resources :search_terms, only: [:index, :show] do
+    scope module: :search_terms do
+      resources :stats, only: [] do
+        collection do
+          get :impressions, :clicks
+        end
+      end
+    end
+  end
   resources :ad_groups
   resources :campaigns
   resources :keywords, only: [:index, :show]

@@ -5,3 +5,5 @@
 //= require activestorage
 //= require turbolinks
 //= require theme
+//= require highcharts
+//= require chartkick

@@ -21,4 +21,28 @@
   </div>
 </div>
 
+<div class="row mt-3">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Impressions
+      </div>
+      <div class="card-body">
+        <%= line_chart impressions_search_term_stats_path(@search_term) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Clicks
+      </div>
+      <div class="card-body">
+        <%= line_chart clicks_search_term_stats_path(@search_term) %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= render partial: 'search_term_report_items/table', locals: { items: @search_term_report_items } %>
