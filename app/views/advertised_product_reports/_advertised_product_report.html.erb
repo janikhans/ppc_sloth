@@ -1,10 +1,10 @@
 <tr>
-  <td><%= link_to advertised_product_report.filename, advertised_product_report_path(advertised_product_report) %></td>
+  <td><%= link_to advertised_product_report.filename, report_path(advertised_product_report) %></td>
   <td><%= advertised_product_report.type %></td>
   <td><%= advertised_product_report.period_start.strftime('%b %d, %Y') %> - <%= advertised_product_report.period_end.strftime('%b %d, %Y') %></td>
   <% if advertised_product_report.imported? %>
     <td><%= advertised_product_report.imported_at.strftime('%b %d, %Y') %></td>
   <% else %>
-    <td><%= link_to 'Import Now', import_advertised_product_report_path(advertised_product_report), method: :post, class: 'btn btn-sm btn-primary' %></td>
+    <td><%= link_to 'Import Now', import_report_path(advertised_product_report), method: :post, class: 'btn btn-sm btn-primary' %></td>
   <% end %>
 </tr>
