@@ -30,4 +30,17 @@ class ReportAnalyzerServiceTest < ActiveSupport::TestCase
 
     assert_equal @report.type, 'UnknownReport'
   end
+
+  test 'should correctly identify wrong aggregation type' do
+    file = 'invalid_total_aggregation.xlsx'
+    @report.file.attach(io: File.open(file_data(file)), filename: file)
+
+    assert_nil @report.file_errors
+    assert_nil @report.file_format_valid
+
+    ReportAnalyzerService.new(@report).call
+
+    assert_not_nil @report.file_errors
+    assert_not_nil @report.file_format_valid
+  end
 end

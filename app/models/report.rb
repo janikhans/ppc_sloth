@@ -26,8 +26,11 @@ class Report < ApplicationRecord
   end
 
   def import!
-    return unless importable? && analyzed?
-    return if imported?
+    return unless
+      importable? &&
+      analyzed? &&
+      file_format_valid? &&
+      !imported?
     klass = (self.class.name + 'Importer').constantize
     klass.new(self).import!
   end

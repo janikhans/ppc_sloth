@@ -18,8 +18,10 @@ class Bulksheet < ApplicationRecord
   end
 
   def import!
-    return unless analyzed?
-    return if imported?
+    return unless
+      analyzed? &&
+      file_format_valid? &&
+      !imported?
     BulksheetImporter.new(self).import!
   end
 end

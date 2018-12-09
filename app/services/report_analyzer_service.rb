@@ -6,12 +6,24 @@ class ReportAnalyzerService
   def call
     xlsx = instantiate_file
     @report.type = determine_report_type(xlsx)
+    aggregate_type = determine_aggregate_type(xlsx)
 
-    unless @report.type == 'UnknownReport'
+    if @report.type == 'UnknownReport'
+      @report.assign_attributes(
+        file_errors: 'Unknown report type',
+        file_format_valid: false
+      )
+    elsif aggregate_type == :total
+      @report.assign_attributes(
+        file_errors: 'Aggregation type is Total; we only accept Daily',
+        file_format_valid: false
+      )
+    else
       dates = determine_dates(xlsx)
       @report.assign_attributes(
         period_start: dates.first,
-        period_end: dates.last
+        period_end: dates.last,
+        file_format_valid: true
       )
     end
 
@@ -53,5 +65,9 @@ class ReportAnalyzerService
     else
       UnknownReport
     end
+  end
+
+  def determine_aggregate_type(xlsx)
+    xlsx.row(1).include?('Start Date') ? :total : :daily
   end
 end

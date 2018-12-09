@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_192230) do
   create_table "ad_groups", force: :cascade do |t|
     t.bigint "campaign_id"
     t.string "name"
-    t.integer "status", default: 0
+    t.integer "status"
     t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_192230) do
   create_table "ads", force: :cascade do |t|
     t.bigint "sku_id"
     t.bigint "ad_group_id"
-    t.integer "status", default: 0
+    t.integer "status"
     t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 2018_12_08_192230) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string "name"
-    t.integer "targeting_type", default: 0
-    t.integer "status", default: 0
+    t.integer "targeting_type"
+    t.integer "status"
     t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2018_12_08_192230) do
   create_table "keywords", force: :cascade do |t|
     t.bigint "ad_group_id"
     t.string "text", null: false
-    t.integer "match_type", default: 0
+    t.integer "match_type"
     t.boolean "auto", default: false
-    t.integer "status", default: 0
+    t.integer "status"
     t.bigint "amazon_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 2018_12_08_192230) do
     t.date "period_end"
     t.datetime "analyzed_at"
     t.datetime "imported_at"
+    t.boolean "file_format_valid"
+    t.string "file_errors"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -4,19 +4,14 @@ class SearchTermReportImporter
   end
 
   def import!
-    instantiate_file
+    xlsx = instantiate_file
 
-    @xlsx.parse(headers: true)[1..-1].each do |row|
-      @date = row['Date']
-      @currency = row['Currency']
-      @match_type = parse_keyword_match_type(row['Match Type'])
-      @impressions = row['Impressions']
-      @clicks = row['Clicks']
+    xlsx.parse(headers: true)[1..-1].each do |row|
       @campaign = Campaign.find_or_initialize_by(name: row['Campaign Name'])
       @ad_group = @campaign.ad_groups.find_or_initialize_by(name: row['Ad Group Name'])
       @keyword =  @ad_group.keywords.find_or_initialize_by(
         text: row['Targeting'],
-        match_type: @match_type
+        match_type: parse_for_enum(row['Match Type'])
       )
       @search_term = SearchTerm.find_or_initialize_by(text: row['Customer Search Term'])
 
@@ -24,14 +19,14 @@ class SearchTermReportImporter
         ad_group: @ad_group,
         keyword: @keyword,
         search_term: @search_term,
-        date: @date
+        date: row['Date']
       )
 
       @item.assign_attributes(
         report: @report,
-        currency: @currency,
-        impressions: @impressions,
-        clicks: @clicks,
+        currency: row['Currency'],
+        impressions: row['Impressions'],
+        clicks: row['Clicks'],
         click_through_rate: row['Click-Thru Rate (CTR)'],
         cost_per_click: parse_currency(row['Cost Per Click (CPC)']),
         spend: parse_currency(row['Spend']),
@@ -47,8 +42,8 @@ class SearchTermReportImporter
         seven_day_other_sku_sales: parse_currency(row['7 Day Other SKU Sales '])
       )
 
-      @campaign.save if @campaign.new_record?
-      @search_term.save if @search_term.new_record?
+      @campaign.save if @campaign.changed?
+      @search_term.save if @search_term.changed?
       @item.save if @item.changed?
     end
 
@@ -60,7 +55,7 @@ class SearchTermReportImporter
   private
 
   def instantiate_file
-    @xlsx = Roo::Spreadsheet.open(
+    Roo::Spreadsheet.open(
       ActiveStorage::Blob.service.send(:path_for, @report.file.key),
       extension: :xlsx
     )
@@ -71,7 +66,7 @@ class SearchTermReportImporter
     (value * 100).to_i
   end
 
-  def parse_keyword_match_type(value)
+  def parse_for_enum(value)
     return if value.blank?
     value.underscore.tr(' ', '_')
   end

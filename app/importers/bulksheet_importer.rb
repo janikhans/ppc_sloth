@@ -44,30 +44,24 @@ class BulksheetImporter
 
   def create_or_find_campaign(row)
     self.campaign = Campaign.find_by(amazon_id: row['Record ID']) ||
-                    Campaign.find_or_initialize_by(
-                      amazon_id: row['Record ID'],
-                      name: row['Campaign'],
-                      targeting_type: parse_for_enum(row['Campaign Targeting Type'])
-                    )
+                    Campaign.find_or_initialize_by(name: row['Campaign'])
+    campaign.amazon_id = row['Record ID']
+    campaign.targeting_type = parse_for_enum(row['Campaign Targeting Type'])
     campaign.status = parse_for_enum(row['Campaign Status'])
     campaign.save
   end
 
   def create_or_find_ad_group(row)
     self.ad_group = campaign.ad_groups.find_by(amazon_id: row['Record ID']) ||
-                    campaign.ad_groups.find_or_initialize_by(
-                      amazon_id: row['Record ID'],
-                      name: row['Ad Group']
-                    )
+                    campaign.ad_groups.find_or_initialize_by(name: row['Ad Group'])
+    ad_group.amazon_id = row['Record ID']
     ad_group.status = parse_for_enum(row['Ad Group Status'])
     ad_group.save
   end
 
   def create_or_find_ad(row)
     self.ad = ad_group.ads.find_by(amazon_id: row['Record ID']) ||
-              ad_group.ads.find_or_initialize_by(
-                sku: Sku.find_or_initialize_by(name: row['SKU'])
-              )
+              ad_group.ads.find_or_initialize_by(sku: Sku.find_or_initialize_by(name: row['SKU']))
     ad.status = parse_for_enum(row['Status'])
     ad.save
   end
@@ -75,10 +69,10 @@ class BulksheetImporter
   def create_or_find_keyword(row)
     self.keyword = ad_group.keywords.find_by(amazon_id: row['Record ID']) ||
                    ad_group.keywords.find_or_initialize_by(
-                     amazon_id: row['Record ID'],
                      text: row['Keyword or Product Targeting'],
                      match_type: parse_for_enum(row['Match Type'])
                    )
+    keyword.amazon_id = row['Record ID']
     keyword.status = parse_for_enum(row['Status'])
     keyword.save
   end

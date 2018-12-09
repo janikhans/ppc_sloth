@@ -6,6 +6,8 @@ class CreateReports < ActiveRecord::Migration[5.2]
       t.date :period_end
       t.datetime :analyzed_at
       t.datetime :imported_at
+      t.boolean :file_format_valid
+      t.string :file_errors
 
       t.timestamps
     end
