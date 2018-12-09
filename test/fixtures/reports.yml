@@ -6,6 +6,9 @@ one:
 
 two:
   type: AdvertisedProductReport
+  period_start: <%= Date.today - 1.month %>
+  period_end: <%= Date.today %>
+  analyzed_at: <%= Time.current %>
 
 three:
   id: 3

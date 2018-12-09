@@ -1,6 +1,6 @@
 class Ad < ApplicationRecord
   include Statusable
-  
+
   belongs_to :sku
   validates :sku, presence: true
 
