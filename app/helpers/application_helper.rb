@@ -17,4 +17,9 @@ module ApplicationHelper
       concat(content_tag(:span, text))
     end
   end
+
+  def asin_link(asin)
+    link = "https://www.amazon.com/dp/#{asin}"
+    link_to link, link, target: :_blank
+  end
 end

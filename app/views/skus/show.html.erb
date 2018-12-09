@@ -1,14 +1,39 @@
-<p id="notice"><%= notice %></p>
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'SKUs', path: skus_path },
+  { text: @sku.name, path: nil }
+]) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sku.name %>
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <%= link_to 'Edit', edit_sku_path(@sku) %>
+      </div>
+      <div class="card-body">
+        <p><strong>SKU:</strong> <%= @sku.name %></p>
+        <p><strong>First Recorded:</strong><%= @sku.created_at.strftime('%b %d, %Y') %></p>
+        <% if @sku.asin %>
+          <p><strong>Link:</strong> <%= asin_link(@sku.asin) %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Asin:</strong>
-  <%= @sku.asin %>
-</p>
-
-<%= link_to 'Edit', edit_sku_path(@sku) %> |
-<%= link_to 'Back', skus_path %>
+<div class="row mt-3">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Ad Groups
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <% @ad_groups.each do |ad_group| %>
+            <li class="list-group-item"><%= link_to ad_group.campaign.name, ad_group.campaign %> - <%= link_to ad_group.name, ad_group %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

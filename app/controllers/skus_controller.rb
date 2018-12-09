@@ -5,7 +5,9 @@ class SkusController < ApplicationController
     @skus = Sku.all
   end
 
-  def show; end
+  def show
+    @ad_groups = @sku.ad_groups
+  end
 
   def new
     @sku = Sku.new

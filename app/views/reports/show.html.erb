@@ -5,7 +5,7 @@
 ]) %>
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         Report
@@ -35,17 +35,6 @@
           <%= link_to 'Analyze Now', analyze_report_path(@report), method: :post, class: 'btn btn-primary' %>
         <% end %>
       </div>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        Keywords
-      </div>
-      <ul class="list-group list-group-flush">
-        <%#= render @ad_groups %>
-      </ul>
     </div>
   </div>
 </div>

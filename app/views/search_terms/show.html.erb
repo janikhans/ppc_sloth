@@ -13,8 +13,7 @@
         <% if @search_term.asin? %>
           <p>
             <strong>ASIN</strong>
-            <% link = "https://www.amazon.com/dp/#{@search_term.text}" %>
-            <%= link_to link, link, target: :_blank %>
+            <%= asin_link(@search_term.text) %>
           </p>
         <% end %>
       </div>

@@ -9,6 +9,7 @@
     <div class="card">
       <div class="card-body">
         <p><strong>Keyword:</strong> <%= @keyword.text  %></p>
+        <p><strong>Status:</strong> <%= @keyword.status %></p>
         <p><strong>First Recorded:</strong> <%= @keyword.created_at.strftime('%b %d, %Y') %></p>
         <% if @keyword.auto? %>
           <p><strong>Auto Keyword</strong></p>

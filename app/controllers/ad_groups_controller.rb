@@ -7,6 +7,7 @@ class AdGroupsController < ApplicationController
 
   def show
     @grouped_keywords = @ad_group.keywords.group_by(&:match_type)
+    @ads = @ad_group.ads
   end
 
   def new
