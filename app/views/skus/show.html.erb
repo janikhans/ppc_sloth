@@ -21,16 +21,43 @@
   </div>
 </div>
 
-<div class="row mt-3">
+<div class="row">
   <div class="col-md-6">
-    <div class="card">
+    <div class="card mt-3">
       <div class="card-header">
         Ad Groups
       </div>
-      <div class="card-body">
+      <div class="">
         <ul class="list-group list-group-flush">
           <% @ad_groups.each do |ad_group| %>
             <li class="list-group-item"><%= link_to ad_group.campaign.name, ad_group.campaign %> - <%= link_to ad_group.name, ad_group %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-header">
+        Related ASINs
+      </div>
+      <div class="">
+        <ul class="list-group list-group-flush">
+          <% @related_asins.each do |related_asin| %>
+            <li class="list-group-item"><%= link_to related_asin.text, related_asin %> <small><%= asin_link(related_asin.text) %></small></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card mt-3">
+      <div class="card-header">
+        Customer Search Terms
+      </div>
+      <div class="">
+        <ul class="list-group list-group-flush">
+          <% @search_terms.each do |search_term| %>
+            <li class="list-group-item"><%= link_to search_term.text, search_term %></li>
           <% end %>
         </ul>
       </div>

@@ -2,11 +2,12 @@ class CampaignsController < ApplicationController
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
 
   def index
-    @campaigns = Campaign.order(name: :asc)
+    @campaigns = Campaign.with_stats.order('sales desc')
   end
 
   def show
     @ad_groups = @campaign.ad_groups
+    @aggregate_stats = @campaign.aggregate_stats
   end
 
   def new

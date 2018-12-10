@@ -1,37 +1,26 @@
-# rand(5..10).times do
-#   Campaign.create!(name: Faker::Commerce.product_name)
-# end
-#
-# Campaign.all.each do |campaign|
-#   rand(1..2).times do
-#     campaign.ad_groups.create!(name: Faker::App.name)
-#   end
-# end
-#
-# AdGroup.all.each do |ad_group|
-#   rand(3..20).times do
-#     ad_group.keywords.create!(
-#       text: Faker::Hipster.words(rand(1..4)).join(' '),
-#       match_type: Keyword.match_types.keys.sample
-#     )
-#   end
-# end
-#
-# rand(100..150).times do
-#   SearchTerm.create(text: Faker::Hipster.words(rand(1..4)).join(' '))
-# end
+bulksheet = Bulksheet.new
+bulksheet.file.attach(
+  io: File.open(File.join(Rails.root, '/demo_data/bulksheet.xlsx')),
+  filename: 'bulksheet.xlsx'
+)
+bulksheet.save
+bulksheet.analyze!
+bulksheet.import!
 
+search_term_report = Report.new
+search_term_report.file.attach(
+  io: File.open(File.join(Rails.root, '/demo_data/ap_search_term_sep_06_dec_06.xlsx')),
+  filename: 'ap_search_term_sep_06_dec_06.xlsx'
+)
+search_term_report.save
+search_term_report.analyze!
+search_term_report.import!
 
-# report = Report.new(name: 'Test Report')
-# report.file.attach(
-#   io: File.open(File.join(Rails.root, '/test/fixtures/files/report.csv')),
-#   filename: 'report.csv'
-# )
-# report.save
-# report.import!
-
-
-# SearchTermReportImporter.new(
-#   path: File.join(Rails.root, '/test/fixtures/files/report.csv'),
-#   report: report
-# ).import!
+advertised_product_report = Report.new
+advertised_product_report.file.attach(
+  io: File.open(File.join(Rails.root, '/demo_data/sp_advertised_products_sep_06_dec_06.xlsx')),
+  filename: 'sp_advertised_products_sep_06_dec_06.xlsx'
+)
+advertised_product_report.save
+advertised_product_report.analyze!
+advertised_product_report.import!

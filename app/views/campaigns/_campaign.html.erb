@@ -2,4 +2,8 @@
   <td><%= link_to campaign.name, campaign_path(campaign) %></td>
   <td><%= campaign.targeting_type %></td>
   <td><%= campaign.status %></td>
+  <td><%= campaign.clicks %></td>
+  <td><%= campaign.impressions %></td>
+  <td><%= number_to_currency(campaign.spend / 100.0) %></td>
+  <td><%= number_to_currency(campaign.sales / 100.0) %></td>
 </tr>

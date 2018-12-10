@@ -7,6 +7,8 @@ class SkusController < ApplicationController
 
   def show
     @ad_groups = @sku.ad_groups
+    @search_terms = @sku.customer_search_terms
+    @related_asins = @sku.related_asins
   end
 
   def new
