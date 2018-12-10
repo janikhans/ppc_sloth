@@ -20,6 +20,7 @@ class Keyword < ApplicationRecord
   before_validation :check_if_auto
 
   has_many :search_term_report_items
+  has_many :targeting_report_items
 
   delegate :campaign, to: :ad_group
 

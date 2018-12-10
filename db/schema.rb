@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_09_025151) do
+ActiveRecord::Schema.define(version: 2018_12_10_002252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,6 +176,34 @@ ActiveRecord::Schema.define(version: 2018_12_09_025151) do
     t.index ["amazon_id"], name: "index_skus_on_amazon_id"
   end
 
+  create_table "targeting_report_items", force: :cascade do |t|
+    t.bigint "report_id"
+    t.bigint "ad_group_id"
+    t.bigint "keyword_id"
+    t.date "date"
+    t.string "currency"
+    t.integer "impressions", default: 0
+    t.integer "clicks", default: 0
+    t.decimal "click_through_rate", precision: 9, scale: 4, default: "0.0"
+    t.integer "cost_per_click", default: 0
+    t.integer "spend", default: 0
+    t.integer "seven_day_total_sales", default: 0
+    t.integer "total_advertising_cost_of_sales", default: 0
+    t.decimal "total_return_on_advertising_spend", precision: 9, scale: 4, default: "0.0"
+    t.integer "seven_day_total_orders", default: 0
+    t.integer "seven_day_total_units", default: 0
+    t.decimal "seven_day_conversion_rate", precision: 9, scale: 4, default: "0.0"
+    t.integer "seven_day_advertised_sku_units", default: 0
+    t.integer "seven_day_other_sku_units", default: 0
+    t.integer "seven_day_advertised_sku_sales", default: 0
+    t.integer "seven_day_other_sku_sales", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ad_group_id"], name: "index_targeting_report_items_on_ad_group_id"
+    t.index ["keyword_id"], name: "index_targeting_report_items_on_keyword_id"
+    t.index ["report_id"], name: "index_targeting_report_items_on_report_id"
+  end
+
   add_foreign_key "ad_groups", "campaigns"
   add_foreign_key "ads", "ad_groups"
   add_foreign_key "ads", "skus"
@@ -187,4 +215,7 @@ ActiveRecord::Schema.define(version: 2018_12_09_025151) do
   add_foreign_key "search_term_report_items", "keywords"
   add_foreign_key "search_term_report_items", "reports"
   add_foreign_key "search_term_report_items", "search_terms"
+  add_foreign_key "targeting_report_items", "ad_groups"
+  add_foreign_key "targeting_report_items", "keywords"
+  add_foreign_key "targeting_report_items", "reports"
 end

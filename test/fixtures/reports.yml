@@ -12,3 +12,9 @@ two:
 
 three:
   id: 3
+
+four:
+  type: TargetingReport
+  period_start: <%= Date.today - 1.month %>
+  period_end: <%= Date.today %>
+  analyzed_at: <%= Time.current %>

@@ -1,4 +1,4 @@
-class SearchTermReportImporter
+class TargetingReportImporter
   def initialize(report)
     @report = report
   end
@@ -13,12 +13,10 @@ class SearchTermReportImporter
         text: row['Targeting'],
         match_type: parse_for_enum(row['Match Type'])
       )
-      @search_term = SearchTerm.find_or_initialize_by(text: row['Customer Search Term'])
 
-      @item = SearchTermReportItem.find_or_initialize_by(
+      @item = TargetingReportItem.find_or_initialize_by(
         ad_group: @ad_group,
         keyword: @keyword,
-        search_term: @search_term,
         date: row['Date']
       )
 
@@ -43,7 +41,6 @@ class SearchTermReportImporter
       )
 
       @campaign.save
-      @search_term.save
       @item.save
     end
 
