@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   resources :campaigns
   resources :keywords, only: [:index, :show]
   resources :skus
+  resources :stats, only: [] do
+    collection do
+      get :impressions, :clicks, :spend, :sales
+    end
+  end
 end

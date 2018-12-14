@@ -14,7 +14,6 @@ targeting_report.file.attach(
 )
 targeting_report.save
 targeting_report.analyze!
-targeting_report.import!
 
 search_term_report = Report.new
 search_term_report.file.attach(
@@ -23,7 +22,6 @@ search_term_report.file.attach(
 )
 search_term_report.save
 search_term_report.analyze!
-search_term_report.import!
 
 advertised_product_report = Report.new
 advertised_product_report.file.attach(
@@ -32,4 +30,5 @@ advertised_product_report.file.attach(
 )
 advertised_product_report.save
 advertised_product_report.analyze!
-advertised_product_report.import!
+
+Report.all.map(&:import!)
