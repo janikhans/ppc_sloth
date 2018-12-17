@@ -5,5 +5,8 @@
   <td><%= keyword.reported_days %></td>
   <td><%= keyword.impressions %></td>
   <td><%= keyword.clicks %></td>
-  <td><%= number_to_percentage(keyword.ctr) %></td>
+  <td><%= number_to_percentage(keyword.ctr * 100) if keyword.ctr %></td>
+  <td><%= number_to_currency(keyword.spend / 100.0) if keyword.spend %></td>
+  <td><%= number_to_currency(keyword.sales / 100.0) if keyword.sales %></td>
+  <td><%= number_to_percentage(keyword.acos * 100) if keyword.acos %></td>
 </tr>

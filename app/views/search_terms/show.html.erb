@@ -21,6 +21,27 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mt-3">
+      <div class="card-header">
+        Triggered By Keywords
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <% @keywords.each do |keyword| %>
+            <li class="list-group-item">
+              <%= keyword.text %> <em><%= keyword.match_type %></em>
+              <%= link_to keyword.ad_group.campaign.name, keyword.ad_group.campaign %>
+              <%= link_to keyword.ad_group.name, keyword.ad_group %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row mt-3">
   <div class="col-md-12">
     <div class="card">

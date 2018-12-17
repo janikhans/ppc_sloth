@@ -3,6 +3,10 @@ class SearchTerm < ApplicationRecord
   scope :customer_term, -> { where(asin: false) }
 
   has_many :search_term_report_items
+  has_many :keywords,
+    -> { positive.distinct },
+    through: :search_term_report_items
+
   before_validation :check_if_asin
 
   scope :with_stats, lambda {

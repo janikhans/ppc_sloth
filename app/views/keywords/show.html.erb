@@ -1,19 +1,81 @@
 <%= breadcrumbs_helper([
   { text: 'Dashboard', path: root_path },
-  { text: 'Keywords', path: nil },
+  { text: 'Keywords', path: keywords_path },
   { text: @keyword.text, path: nil }
 ]) %>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <div class="card">
+      <div class="card-header">Details</div>
       <div class="card-body">
         <p><strong>Keyword:</strong> <%= @keyword.text  %></p>
+        <p><strong>Match Type:</strong> <%= @keyword.match_type %></p>
+        <p><strong>Campaign:</strong> <%= link_to @keyword.ad_group.campaign.name, @keyword.ad_group.campaign %></p>
+        <p><strong>Ad Group:</strong> <%= link_to @keyword.ad_group.name, @keyword.ad_group %></p>
         <p><strong>Status:</strong> <%= @keyword.status %></p>
-        <p><strong>First Recorded:</strong> <%= @keyword.created_at.strftime('%b %d, %Y') %></p>
         <% if @keyword.auto? %>
           <p><strong>Auto Keyword</strong></p>
         <% end %>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        Duplicated Keywords
+      </div>
+      <div class="">
+        <ul class="list-group list-group-flush">
+          <% @duplicate_keywords.each do |keyword| %>
+            <li class="list-group-item">
+              <%= keyword.text %> <em><%= keyword.match_type %></em>
+              <%= link_to keyword.ad_group.campaign.name, keyword.ad_group.campaign %>
+              <%= link_to keyword.ad_group.name, keyword.ad_group %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        Search Terms Triggered
+      </div>
+      <div class="">
+        <ul class="list-group list-group-flush">
+          <% @search_terms.each do |search_term| %>
+            <li class="list-group-item">
+              <%= link_to search_term.text, search_term %>
+              (clicks: <%= search_term.clicks %>)
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">Stats</div>
+      <div class="card-body">
+        <p><strong>Period Recorded:</strong> <%= @aggregate_stats.first_recorded&.strftime('%b %d, %Y') %> - <%= @aggregate_stats.last_recorded&.strftime('%b %d, %Y') %></p>
+        <p><strong>Impressions:</strong> <%= number_with_delimiter(@aggregate_stats.impressions) %></p>
+        <p><strong>Clicks:</strong> <%= number_with_delimiter(@aggregate_stats.clicks) %></p>
+        <p><strong>Total Spend:</strong> <%= number_to_currency(@aggregate_stats.spend / 100.0) %></p>
+        <p><strong>Total Sales:</strong> <%= number_to_currency(@aggregate_stats.sales / 100.0) %></p>
+        <p><strong>CTR:</strong> <%= number_to_percentage(@aggregate_stats.clicks / @aggregate_stats.impressions.to_f * 100) %></p>
+        <p><strong>ACoS:</strong> <%= number_to_percentage(@aggregate_stats.spend / @aggregate_stats.sales.to_f * 100) %></p>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        Targeted SKUs
+      </div>
+      <div class="">
+        <ul class="list-group list-group-flush">
+          <% @skus.each do |sku| %>
+            <li class="list-group-item">
+              <%= link_to sku.name, sku %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
