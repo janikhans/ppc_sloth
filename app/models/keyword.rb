@@ -48,7 +48,8 @@ class Keyword < ApplicationRecord
     phrase: 1,
     exact: 2,
     negative_phrase: 3,
-    negative_exact: 4
+    negative_exact: 4,
+    dash: 5
   }
 
   before_validation :check_if_auto

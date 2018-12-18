@@ -39,6 +39,7 @@ class BulksheetImporter
 
   def parse_for_enum(value)
     return if value.blank?
+    return 'dash' if value == '-'
     value.underscore.tr(' ', '_')
   end
 
