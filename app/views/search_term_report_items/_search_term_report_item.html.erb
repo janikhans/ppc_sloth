@@ -1,4 +1,4 @@
-<tr>
+<tr id="<%= search_term_report_item.id %>">
   <td><%= link_to search_term_report_item.ad_group.campaign.name, search_term_report_item.ad_group.campaign %></td>
   <td><%= link_to search_term_report_item.ad_group.name, search_term_report_item.ad_group %></td>
   <td><%= link_to search_term_report_item.search_term.text, search_term_report_item.search_term %></td>
@@ -7,16 +7,16 @@
   <td><%= search_term_report_item.impressions %></td>
   <td><%= search_term_report_item.clicks %></td>
   <td><%= number_to_percentage(search_term_report_item.click_through_rate) %></td>
-  <td><%= number_to_currency(search_term_report_item.cost_per_click / 100) %></td>
-  <td><%= number_to_currency(search_term_report_item.spend / 100 ) %></td>
-  <td><%= number_to_currency((search_term_report_item.total_advertising_cost_of_sales || 0) / 100) %></td>
+  <td><%= number_to_currency(search_term_report_item.cost_per_click / 100.0) %></td>
+  <td><%= number_to_currency(search_term_report_item.spend / 100.0 ) %></td>
+  <td><%= number_to_currency((search_term_report_item.total_advertising_cost_of_sales || 0) / 100.0) %></td>
   <td><%= number_to_percentage(search_term_report_item.total_return_on_advertising_spend) %></td>
-  <td><%= number_to_currency(search_term_report_item.seven_day_total_sales / 100) %></td>
+  <td><%= number_to_currency(search_term_report_item.seven_day_total_sales / 100.0) %></td>
   <td><%= search_term_report_item.seven_day_total_orders %></td>
   <td><%= search_term_report_item.seven_day_total_units %></td>
   <td><%= number_to_percentage(search_term_report_item.seven_day_conversion_rate) %></td>
   <td><%= search_term_report_item.seven_day_advertised_sku_units %></td>
   <td><%= search_term_report_item.seven_day_other_sku_units %></td>
-  <td><%= number_to_currency(search_term_report_item.seven_day_advertised_sku_sales/ 100) %></td>
-  <td><%= number_to_currency(search_term_report_item.seven_day_other_sku_sales / 100) %></td>
+  <td><%= number_to_currency(search_term_report_item.seven_day_advertised_sku_sales / 100.0) %></td>
+  <td><%= number_to_currency(search_term_report_item.seven_day_other_sku_sales / 100.0) %></td>
 </tr>

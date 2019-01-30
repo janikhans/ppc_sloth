@@ -1,34 +1,20 @@
-bulksheet = Bulksheet.new
-bulksheet.file.attach(
-  io: File.open(File.join(Rails.root, '/demo_data/bulksheets/bulksheet.xlsx')),
-  filename: 'bulksheet.xlsx'
-)
-bulksheet.save
-bulksheet.analyze!
-bulksheet.import!
+def import_files(klass, directory)
+  files = Dir.glob(directory + '/*.xlsx')
+  files.each do |file|
+    record = klass.new
+    record.file.attach(
+      io: File.open(File.join(Rails.root, file)),
+      filename: File.basename(file, '.xlsx')
+    )
+    record.save
+    record.analyze!
+  end
+end
 
-targeting_report = Report.new
-targeting_report.file.attach(
-  io: File.open(File.join(Rails.root, '/demo_data/reports/sp_targeting_sep_06_dec_06.xlsx')),
-  filename: 'sp_targeting_sep_06_dec_06.xlsx'
-)
-targeting_report.save
-targeting_report.analyze!
+import_files(Bulksheet, 'demo_data/bulksheets')
+# import_files(Bulksheet, 'prod_data/bulksheets')
+Bulksheet.all.map(&:import!)
 
-search_term_report = Report.new
-search_term_report.file.attach(
-  io: File.open(File.join(Rails.root, '/demo_data/reports/sp_search_term_sep_06_dec_06.xlsx')),
-  filename: 'sp_search_term_sep_06_dec_06.xlsx'
-)
-search_term_report.save
-search_term_report.analyze!
-
-advertised_product_report = Report.new
-advertised_product_report.file.attach(
-  io: File.open(File.join(Rails.root, '/demo_data/reports/sp_advertised_products_sep_06_dec_06.xlsx')),
-  filename: 'sp_advertised_products_sep_06_dec_06.xlsx'
-)
-advertised_product_report.save
-advertised_product_report.analyze!
-
-Report.all.map(&:import!)
+import_files(Report, 'demo_data/reports')
+import_files(Report, 'prod_data/reports')
+Report.order(period_start: :asc).map(&:import!)
