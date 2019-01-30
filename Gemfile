@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.3'
 
 gem 'active_link_to'
 gem 'bootsnap', '>= 1.1.0', require: false
