@@ -1,15 +1,14 @@
 <%= breadcrumbs_helper([
   { text: 'Dashboard', path: root_path },
-  { text: 'Keywords', path: keywords_path }
+  { text: 'SKUs', path: skus_path },
+  { text: @sku.name, path: sku_path(@sku) },
+  { text: 'Search Terms', path: '' }
 ]) %>
 
 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
   <thead>
     <tr>
-      <th>Campaign</th>
-      <th>Ad Group</th>
       <th>Term</th>
-      <th>Match Type</th>
       <th>Reported Days</th>
       <th>Impressions</th>
       <th>Clicks</th>
@@ -17,10 +16,9 @@
       <th>Spend</th>
       <th>Sales</th>
       <th>ACoS</th>
-      <th>ROI</th>
     </tr>
   </thead>
   <tbody>
-    <%= render @keywords %>
+    <%= render @search_terms %>
   </tbody>
 </table>

@@ -28,3 +28,4 @@
 
 /prod_data
 .DS_Store
+dump.rdb

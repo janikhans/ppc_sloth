@@ -8,10 +8,10 @@ class StatsController < ApplicationController
   end
 
   def spend
-    render json: TargetingReportItem.group_by_day(:date).sum(:spend)
+    render json: TargetingReportItem.group_by_day(:date).sum('spend / 100.0')
   end
 
   def sales
-    render json: TargetingReportItem.group_by_day(:date).sum(:seven_day_total_sales)
+    render json: TargetingReportItem.group_by_day(:date).sum('seven_day_total_sales / 100.0')
   end
 end

@@ -10,4 +10,5 @@
   <td><%= number_to_currency(keyword.spend / 100.0) if keyword.spend %></td>
   <td><%= number_to_currency(keyword.sales / 100.0) if keyword.sales %></td>
   <td><%= number_to_percentage(keyword.acos * 100) if keyword.acos %></td>
+  <td><%= number_to_percentage(keyword.roi * 100) if keyword.roi %></td>
 </tr>

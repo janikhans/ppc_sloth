@@ -1,5 +1,6 @@
 class BulksheetAnalyzerService
-  CURRENT_SHEETS = ['Sponsored Products Campaigns', 'Headline Search Campaigns', 'Portfolios'].freeze
+  OLD_FORMAT = ['Sponsored Products Campaigns', 'Headline Search Campaigns', 'Portfolios'].freeze
+  NEW_FORMAT = ['Sponsored Products Campaigns', 'Sponsored Brands Campaigns', 'Portfolios'].freeze
 
   def initialize(bulksheet)
     @bulksheet = bulksheet
@@ -28,6 +29,6 @@ class BulksheetAnalyzerService
   end
 
   def check_bulksheet_format(sheets)
-    (CURRENT_SHEETS - sheets).empty?
+    (OLD_FORMAT - sheets).empty? || (NEW_FORMAT - sheets).empty?
   end
 end

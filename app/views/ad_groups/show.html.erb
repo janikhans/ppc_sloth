@@ -32,7 +32,7 @@
 <h3>Keywords</h3>
 <div class="row mt-3">
   <% @grouped_keywords.each do |match_type, keywords| %>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="card">
         <div class="card-header">
           <%= match_type.humanize %>
@@ -45,4 +45,19 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Search Terms
+      </div>
+      <ul class="list-group list-group-flush">
+        <% @search_term_report_items.each do |search_term_report_item| %>
+          <li class="list-group-item"><%= link_to search_term_report_item.search_term.text, search_term_report_item.search_term %> <span class="pill pill-primary"><%= search_term_report_item.keyword.text %></span></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>

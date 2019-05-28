@@ -16,6 +16,7 @@
         <% if @sku.asin %>
           <p><strong>Link:</strong> <%= asin_link(@sku.asin) %></p>
         <% end %>
+        <p><%= link_to 'View Search Terms', sku_search_terms_path(@sku) %></p>
       </div>
     </div>
   </div>

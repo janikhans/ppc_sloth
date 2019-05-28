@@ -19,7 +19,11 @@ class Keyword < ApplicationRecord
       CASE report_stats.sales
         WHEN 0 THEN 0
         ELSE (report_stats.spend::FLOAT / report_stats.sales)
-        END AS acos
+        END AS acos,
+      CASE report_stats.spend
+        WHEN 0 THEN 0
+        ELSE ((report_stats.sales::FLOAT - report_stats.spend::FLOAT) / report_stats.spend)
+        END AS roi
       ')
       .joins('
         LEFT JOIN (

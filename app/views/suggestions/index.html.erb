@@ -1,0 +1,41 @@
+<%= breadcrumbs_helper([
+  { text: 'Dashboard', path: root_path },
+  { text: 'Suggestions', path: suggestions_path }
+]) %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <%= simple_form_for @form, url: suggestions_path, as: :search, wrapper: :inline_form,html: { class: "form-inline" }, method: :get do |f| %>
+        <%= f.input :sku_ids, collection: @skus, input_html: { multiple: true } %>
+        <%= f.input :target_acos, as: :numeric %>
+        <%= f.input :target_clicks, as: :numeric %>
+        <%= f.input :target_spend, as: :numeric %>
+        <%= f.button :submit, class: "btn-primary mb-2" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-md-12">
+    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Reported Days</th>
+          <th>Impressions</th>
+          <th>Clicks</th>
+          <th>CTR</th>
+          <th>Spend</th>
+          <th>Sales</th>
+          <th>ACoS</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'search_term', collection: @search_terms %>
+      </tbody>
+    </table>
+  </div>
+</div>

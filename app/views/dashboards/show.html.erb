@@ -79,7 +79,7 @@
         Impressions
       </div>
       <div class="card-body">
-        <%= line_chart impressions_stats_path %>
+        <%= line_chart impressions_stats_path, thousands: ',' %>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
         Clicks
       </div>
       <div class="card-body">
-        <%= line_chart clicks_stats_path %>
+        <%= line_chart clicks_stats_path, thousands: ',' %>
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@
         Spend
       </div>
       <div class="card-body">
-        <%= line_chart spend_stats_path %>
+        <%= line_chart spend_stats_path, prefix: '$', thousands: ',' %>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
         Sales
       </div>
       <div class="card-body">
-        <%= line_chart sales_stats_path %>
+        <%= line_chart sales_stats_path, prefix: '$', thousands: ',' %>
       </div>
     </div>
   </div>

@@ -1,0 +1,10 @@
+<tr>
+  <td><%= link_to search_term.text, search_term_path(search_term) %></td>
+  <td><%= search_term.reported_days %></td>
+  <td><%= search_term.impressions %></td>
+  <td><%= search_term.clicks %></td>
+  <td><%= number_to_percentage(search_term.ctr * 100) if search_term.ctr %></td>
+  <td><%= number_to_currency(search_term.spend / 100.0) if search_term.spend %></td>
+  <td><%= number_to_currency(search_term.sales / 100.0) if search_term.sales %></td>
+  <td><%= number_to_percentage(search_term.acos * 100) if search_term.acos %></td>
+</tr>

@@ -7,6 +7,7 @@ class AdGroupsController < ApplicationController
 
   def show
     @grouped_keywords = @ad_group.keywords.group_by(&:match_type)
+    @search_term_report_items = @ad_group.search_term_report_items.includes(:search_term, :keyword)
     @ads = @ad_group.ads
   end
 

@@ -15,13 +15,20 @@ Rails.application.routes.draw do
       end
     end
   end
+
   resources :ad_groups
   resources :campaigns
   resources :keywords, only: [:index, :show]
-  resources :skus
+  resources :skus do
+    scope module: :skus do
+      resources :search_terms, only: :index
+    end
+  end
   resources :stats, only: [] do
     collection do
       get :impressions, :clicks, :spend, :sales
     end
   end
+
+  resources :suggestions, only: :index
 end

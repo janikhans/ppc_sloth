@@ -22,6 +22,7 @@ class Bulksheet < ApplicationRecord
       analyzed? &&
       file_format_valid? &&
       !imported?
+
     BulksheetImporter.new(self).import!
   end
 end

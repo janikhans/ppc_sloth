@@ -24,7 +24,12 @@ class SearchTerm < ApplicationRecord
       ')
       .joins('
         LEFT JOIN (
-          SELECT search_term_id, SUM(impressions) AS impressions, SUM(clicks) AS clicks, SUM(spend) AS spend, SUM(seven_day_total_sales) AS sales, COUNT(*) AS reported_days
+          SELECT search_term_id,
+            SUM(impressions) AS impressions,
+            SUM(clicks) AS clicks,
+            SUM(spend) AS spend,
+            SUM(seven_day_total_sales) AS sales,
+            COUNT(*) AS reported_days
           FROM search_term_report_items
           GROUP BY search_term_id
         ) AS report_stats ON search_terms.id = report_stats.search_term_id

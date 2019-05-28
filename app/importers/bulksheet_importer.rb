@@ -40,6 +40,7 @@ class BulksheetImporter
   def parse_for_enum(value)
     return if value.blank?
     return 'dash' if value == '-'
+
     value.underscore.tr(' ', '_')
   end
 
@@ -68,6 +69,8 @@ class BulksheetImporter
   end
 
   def create_or_find_keyword(row)
+    return if row['Ad Group'].blank? # Means this is a campaign Negative Keyword
+
     self.keyword = ad_group.keywords.find_by(amazon_id: row['Record ID']) ||
                    ad_group.keywords.find_or_initialize_by(
                      text: row['Keyword or Product Targeting'],
